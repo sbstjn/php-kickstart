@@ -57,12 +57,21 @@ class Request {
   }
   
   /**
+   * Get Request parameter
+   * @param string $k parameter name
+   * @param mixed $default default return value if key not found
+   * @param mixed
+   */
+  public function param($k, $default = null) {
+    return $this->url->param($k, $default);
+  }
+  
+  /**
    * Parse HTTP headers
    */  
   private function parseHeader() {
     $this->header = apache_request_headers();
   }
-  
   
   /**
    * Parse web browser cookies

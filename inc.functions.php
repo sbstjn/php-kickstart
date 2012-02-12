@@ -11,6 +11,7 @@ function d($var) {
   $last = $trace[0];
 
   $line = str_replace(ABSPATH, '', $last['file']) . ':' . $last['line'];
+  echo "\n\n";
   echo ' ++' . str_pad('+', strlen($line), '+', STR_PAD_LEFT) . "+\n";
   echo ' + ' . $line . "\n\n";
   

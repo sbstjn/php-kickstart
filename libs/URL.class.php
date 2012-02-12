@@ -76,5 +76,26 @@ class URL {
     
     return $return;
   }
+  
+  /**
+   * Parse Request with regex for route
+   * @param string $regex
+   */
+  public function parseParametersWithRoute(&$route) {
+    $data = '';
+    preg_match_all($route['regex'], $this->path, $data, PREG_SET_ORDER);
+    array_shift($data[0]);
+    $values = $data[0];
+  
+    $data = '';
+    preg_match_all($route['regex'], $route['url'], $data, PREG_SET_ORDER);
+    array_shift($data[0]);
+    $params = array();    
+    foreach ($data[0] as $k => $v) {
+      $params[substr($v, 1)] = $values[$k];
+    }
+
+    $this->params = array_merge($this->parseQuery($this->query), $params);
+  }  
 
 }

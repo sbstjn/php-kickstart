@@ -17,7 +17,7 @@ class Response {
    * Template Engine
    * @var object
    */
-  var $tpl;
+  private $tpl;
   
   /**
    * HTTP Response Code

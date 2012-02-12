@@ -21,6 +21,8 @@ require_once ABSPATH . 'inc.config.php';
 $Router = new Router(new Request(), new Response());
 
 $Router->get('/')->bind('General', 'home');
+$Router->get('/download/:file/:type')->bind('General', 'download');
+$Router->get('/:page')->bind('General', 'home');
 $Router->all('*')->bind('Error', 'notFound');
 
 /**

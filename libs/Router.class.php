@@ -138,8 +138,14 @@ class Router {
       if (!method_exists($this->handler[$obj], $func)) {
         throw new Exception('Unkown handler "' . $func . '" for object "' . $obj . '"'); }      
         
+      $regex = preg_replace('/\/:([a-zA-Z0-9]*)\//', '/([^/]*)/', $this->tmp);
+      $regex = preg_replace('/\/:[a-zA-Z0-9]*$/', '/([^/]*)', $regex);
+      $regex = preg_replace('/\/:([^\?]*)\?/', '/([^/]*)', $regex);
+      $regex = "/" . str_replace('/', '\/', $regex) . "$/";
+        
       $handler = array(
         'url'     => $this->tmp,
+        'regex'   => $regex,
         'method'  => $this->nextMethod,
         'handler' => array($obj, $func));
       array_push($this->routes, $handler);
@@ -161,13 +167,8 @@ class Router {
     if ($route['url'] == '/' && $this->req->url->path != $route['url']) {
       return false; } /* Dirty hack for '/' */
     
-    $regex = preg_replace('/\/:([a-zA-Z0-9]*)\//', '/([^/]*)/', $route['url']);
-    $regex = preg_replace('/\/:[a-zA-Z0-9]*$/', '/([^/]*)', $regex);
-    $regex = preg_replace('/\/:([^\?]*)\?/', '/([^/]*)', $regex);
-    $regex = "/" . str_replace('/', '\/', $regex) . "$/";
-
     $result = array();
-    preg_match_all($regex, $this->req->url->path, $result, PREG_PATTERN_ORDER);
+    preg_match_all($route['regex'], $this->req->url->path, $result, PREG_PATTERN_ORDER);
     
     if (count($result[0]) > 0) {
       return true; }
@@ -188,10 +189,12 @@ class Router {
     global $Router;
     
     $routes = array_slice($this->routes, $this->step);
-    foreach ($routes as $route) {
+    foreach ($routes as &$route) {
       $this->step++;
       
       if ($this->urlMatchesRoute($route)) {
+        $this->req->url->parseParametersWithRoute($route);
+        
         $this->handler[$route['handler'][0]]->$route['handler'][1]($this->req, $this->res, function() { global $Router; $Router->next(); });
         break;
       } else {
