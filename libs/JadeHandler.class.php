@@ -1,5 +1,13 @@
 <?php
 
+/*
+ * This file is part of the php-kickstart.
+ * (c) 2012 Sebastian Müller <c@semu.mp>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+ 
 require_once ABSPATH . '/vendor/jade/vendor/symfony/src/Symfony/Framework/UniversalClassLoader.php';
 
 use Symfony\Framework\UniversalClassLoader;

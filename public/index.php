@@ -1,12 +1,24 @@
 <?php
 
-if (__DIR__ == '__DIR__') {
-  die('you need php 5.3 get this working…'); }
+/*
+ * This file is part of the php-kickstart.
+ * (c) 2012 Sebastian Müller <c@semu.mp>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-define ('ABSPATH', __DIR__ . '/../');
+/**
+ * Start Output Buffer
+ */
+ob_start();
 
-require_once '../libs/JadeHandler.class.php';
+/**
+ * Set path to your php-kickstart folder 
+ */
+define ('ABSPATH', '/kunden/mws-server.de/webseiten/1001/sebastianmueller.mp/php/php-kickstart/');
 
-$Jade = new JadeHandler(ABSPATH . 'views/');
-$Jade->assign('items', array('Lorem', 'Ipsum', 'Dolor', 'Sit', 'Amet'));
-$Jade->render('home');
+/**
+ * Start-Up
+ */
+require_once ABSPATH . 'bootstrap.php';
