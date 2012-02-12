@@ -63,6 +63,14 @@ class Router {
     $this->handler = array();
     $this->routes = array();
   }
+  
+  public function setLogger(&$obj) {
+  
+  }
+  
+  public function setTemplate(&$obj) {
+    $this->res->setTemplate($obj);
+  }
 
   /**
    * Prepare for binding a new POST url

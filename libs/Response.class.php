@@ -23,16 +23,20 @@ class Response {
    * Initialize Response 
    */
   public function __construct() {
-    $this->tpl = new JadeHandler(ABSPATH . 'views/');
-  }
 
+  }
+  
+  public function setTemplate(&$obj) {
+    $this->tpl = &$obj;
+  }
+  
   /**
    * Assign value to Response key
    * @param string $name 
    * @param mixed $value
    */  
   public function assign($name, $value = null) {
-    $tpl->assign($name, $value);
+    $this->tpl->assign($name, $value);
   }
   
   /**
@@ -40,7 +44,7 @@ class Response {
    * @param string $name template name or path
    */
   public function render($name) {
-    $tpl->render($name);
+    $this->tpl->render($name);
   }
 
 }

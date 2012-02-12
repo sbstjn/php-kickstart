@@ -13,6 +13,19 @@
  */
 class Server {
   
+  var $router;
+  
+  
+  /**
+   * Handle Request
+   */
+  public function __construct(&$Router, &$Template, &$Logger) {
+    $this->router = $Router;
+    $this->router->setTemplate($Template);
+    $this->router->setLogger($Logger);
+    
+    $this->router->handle();
+  }
   /**
    * Handle Request
    * @param Router $Router

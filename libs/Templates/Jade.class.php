@@ -28,15 +28,15 @@ use Everzet\Jade\Filter\CSSFilter;
 /**
  * Custom Jade Wrapper
  **/
-class JadeHandler {
+class JadeTemplate {
   var $jade, $dumper, $parser, $loader, $values = array(), $path = '';
 
   /**
    * Constructor
    * @param string $path where to find views
    **/
-  public function __construct($path) {
-    $this->path = $path;
+  public function __construct() {
+    $this->path = ABSPATH . 'views/';
     
     $this->dumper = new PHPDumper();
     $this->dumper->registerVisitor('tag', new AutotagsVisitor());
@@ -84,6 +84,7 @@ class JadeHandler {
       $view = $this->path . $view; }
     if (!stristr($view, '.jade')) {
       $view = $view . '.jade'; }
+
     eval ('?>' . $this->jade->render($view));
   }
 }
