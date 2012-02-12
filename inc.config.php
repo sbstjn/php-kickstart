@@ -25,6 +25,10 @@ require_once ABSPATH . 'libs/Server.class.php';
 
 require_once ABSPATH . 'libs/Exceptions/FileNotFound.class.php';
 
+/**
+ * Mapping of HTTP Status Codes and Name
+ * @var array 
+ */
 $HTTP_STATUS = array(
   100 => 'Continue',
   101 => 'Switching Protocols',
@@ -78,7 +82,11 @@ $HTTP_STATUS = array(
   507 => 'Insufficient Storage',
   510 => 'Not Extended'
   );
- 
+
+/**
+ * Mapping of HTTP Status Description and Error Code
+ * @var array 
+ */
 $HTTP_STATUS_DESC = array(
   400 => "Your browser sent a request that this server could not understand.",
   401 => "This server could not verify that you are authorized to access the document requested.",

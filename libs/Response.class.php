@@ -48,6 +48,9 @@ class Response {
     $this->status = $code;
   }
   
+  /**
+   * Write HTTP Response Status
+   */
   public function writeStatus() {
     global $HTTP_STATUS;
     
