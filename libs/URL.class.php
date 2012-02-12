@@ -82,6 +82,9 @@ class URL {
    * @param string $regex
    */
   public function parseParametersWithRoute(&$route) {
+    if (!stristr($route['url'], ':')) {
+      return; }
+  
     $data = '';
     preg_match_all($route['regex'], $this->path, $data, PREG_SET_ORDER);
     array_shift($data[0]);
@@ -92,7 +95,7 @@ class URL {
     array_shift($data[0]);
     $params = array();    
     foreach ($data[0] as $k => $v) {
-      $params[substr($v, 1)] = $values[$k];
+      $params[str_replace(array(':', '?'), '', $v)] = $values[$k];
     }
 
     $this->params = array_merge($this->parseQuery($this->query), $params);
