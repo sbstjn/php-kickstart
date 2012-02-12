@@ -20,11 +20,10 @@ require_once ABSPATH . 'inc.config.php';
  */
 $Router = new Router(new Request(), new Response());
 
-$Router->all('*')->bind('Logger', 'action');
 $Router->get('/')->bind('General', 'home');
 $Router->all('*')->bind('Error', 'notFound');
 
 /**
  * Parse current Request
  */
-Server::parse($Router);
+new Server($Router, new JadeTemplate(), new Logger());

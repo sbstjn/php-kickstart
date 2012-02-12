@@ -18,6 +18,12 @@ class Response {
    * @var object
    */
   var $tpl;
+  
+  /**
+   * HTTP Response Code
+   * @var integer
+   */
+  var $status = 200;
 
   /**
    * Initialize Response 
@@ -26,8 +32,26 @@ class Response {
 
   }
   
+  /**
+   * Set Template Handler 
+   * @param object $obj
+   */
   public function setTemplate(&$obj) {
     $this->tpl = &$obj;
+  }
+  
+  /**
+   * Set HTTP Status Code for Response
+   * @param int $code HTTP Status Code
+   */
+  public function status($code) {
+    $this->status = $code;
+  }
+  
+  public function writeStatus() {
+    global $HTTP_STATUS;
+    
+    header("HTTP/1.0 ".$this->status." ".$HTTP_STATUS[$this->status]);
   }
   
   /**
@@ -44,6 +68,8 @@ class Response {
    * @param string $name template name or path
    */
   public function render($name) {
+    $this->writeStatus();
+      
     $this->tpl->render($name);
   }
 

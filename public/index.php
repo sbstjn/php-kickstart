@@ -16,7 +16,7 @@ ob_start();
 /**
  * Set path to your php-kickstart folder 
  */
-define ('ABSPATH', '/kunden/mws-server.de/webseiten/1001/sebastianmueller.mp/php/php-kickstart/');
+define ('ABSPATH', str_replace('/public', '', __DIR__) . '/');
 
 /**
  * Start-Up

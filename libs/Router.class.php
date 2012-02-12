@@ -26,6 +26,12 @@ class Router {
   var $res;
   
   /**
+   * Logger Object
+   * @var Logger
+   */
+  var $logger;
+  
+  /**
    * Array of registered handlers
    * @var array
    */  
@@ -64,10 +70,18 @@ class Router {
     $this->routes = array();
   }
   
+  /**
+   * Set Logger object
+   * @param Logger $obj
+   */
   public function setLogger(&$obj) {
-  
+    $this->logger = &$obj;
   }
   
+  /**
+   * Set Templater Handler
+   * @param object $obj
+   */
   public function setTemplate(&$obj) {
     $this->res->setTemplate($obj);
   }

@@ -3,7 +3,7 @@
 class General {
 
   public function home(&$req, &$res) {
-    echo 'home';
+    $res->render('home');
   }
 
 }
