@@ -24,6 +24,11 @@ $Router->get('/')->bind('General', 'home');
 $Router->get('/check/:optional?')->bind('General', 'check');
 $Router->get('/download/:file/:type')->bind('General', 'download');
 
+$Router->get('/downloadFile/:name?')->bind('General', 'downloadFile');
+$Router->get('/downloadData')->bind('General', 'downloadData');
+
+$Router->get('/api/:type')->bind('General', 'api');
+
 $Router->all('*')->bind('Error', 'notFound');
 
 /**

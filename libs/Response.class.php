@@ -24,6 +24,12 @@ class Response {
    * @var integer
    */
   var $status = 200;
+  
+  /**
+   * Assigned template variables
+   * @var array
+   */
+  var $data = array();
 
   /**
    * Initialize Response 
@@ -63,6 +69,7 @@ class Response {
    * @param mixed $value
    */  
   public function assign($name, $value = null) {
+    $this->data[$name] = $value;
     $this->tpl->assign($name, $value);
   }
   
@@ -74,6 +81,51 @@ class Response {
     $this->writeStatus();
       
     $this->tpl->render($name);
+  }
+  
+  /**
+   * Send remote file to browser as download
+   * @param string $file absolute file path
+   * @param string $name custom filename
+   */
+  public function downloadFile($file, $name = null) {
+    return $this->downloadData(file_get_contents($file), ($name != null ? $name : basename($file)));
+  }
+
+  /**
+   * Send data to browser as download
+   * @param string $data data to send as file download
+   * @param string $name filename
+   */  
+  public function downloadData($data, $name) {
+    header("Content-Description: File Transfer");
+    header('Content-type: text/plain; name=' . $name);
+    header('Content-Disposition: attachment; filename="' . $name .'"');
+    header("Content-Length: ".strlen($data));
+    header('Content-transfer-encoding: 8bit');
+    header('Expires: 0');
+    header('Cache-Control: private');
+    header('Pragma: cache'); 
+    
+    echo $data;
+  }
+  
+  /**
+   * Export assigned values as JSON
+   */  
+  public function renderJSON() {
+    header('Content-type: text/plain;');
+    
+    echo json_encode($this->data);
+  }
+  
+  /**
+   * Export assigned values as XML
+   */    
+  public function renderXML() {
+    header('Content-type: text/plain;');
+    
+    echo XML::array2XML($this->data, 'data');
   }
 
 }

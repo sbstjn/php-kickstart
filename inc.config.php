@@ -22,6 +22,7 @@ require_once ABSPATH . 'libs/Request.class.php';
 require_once ABSPATH . 'libs/Response.class.php';
 require_once ABSPATH . 'libs/DisplayException.class.php';
 require_once ABSPATH . 'libs/Server.class.php';
+require_once ABSPATH . 'libs/XML.class.php';
 
 require_once ABSPATH . 'libs/Exceptions/FileNotFound.class.php';
 
