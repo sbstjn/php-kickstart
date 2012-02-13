@@ -43,7 +43,7 @@ class XML {
     $this->add('<' . $el);
 
     foreach ($attr as $k => $v) {
-      $this->add(' ' . $k . '="' . htmlentities($v) . '"'); }
+      $this->add(' ' . $k . '="' . htmlspecialchars($v, ENT_QUOTES, 'UTF-8') . '"'); }
     
     $this->add(">\n");
     $this->indent();
