@@ -85,6 +85,13 @@ class JadeTemplate {
     if (!stristr($view, '.jade')) {
       $view = $view . '.jade'; }
 
-    eval ('?>' . $this->jade->render($view));
+    try {
+      $tpl = $this->jade->render($view);
+    } catch (Exception $e) {
+      header('content-type: text/plain; charset=utf-8');
+      die($e->highlightContext($this->jade->source));
+    }
+
+    eval ('?>' . $tpl);
   }
 }
