@@ -54,6 +54,14 @@ class JadeTemplate {
     
     $this->clean();
   }
+  
+  /**
+   * Custom to String handler
+   * @return string
+   */
+  public function __toString() {
+    return '[JadeTemplate Object]';
+  }  
 
   /**
    * Clean assigned variables

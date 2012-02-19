@@ -54,6 +54,14 @@ class Request {
   }
   
   /**
+   * Custom to String handler
+   * @return string
+   */
+  public function __toString() {
+    return '[Request Object]';
+  }  
+  
+  /**
    * Parse current url to URL Object
    */
   private function parseURL() {

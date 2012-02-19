@@ -25,7 +25,6 @@ require_once ABSPATH . 'libs/Logger.class.php';
 require_once ABSPATH . 'libs/Router.class.php';
 require_once ABSPATH . 'libs/Request.class.php';
 require_once ABSPATH . 'libs/Response.class.php';
-require_once ABSPATH . 'libs/DisplayException.class.php';
 require_once ABSPATH . 'libs/Server.class.php';
 require_once ABSPATH . 'libs/XML.class.php';
 

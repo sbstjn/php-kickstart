@@ -44,6 +44,14 @@ class Response {
   }
   
   /**
+   * Custom to String handler
+   * @return string
+   */
+  public function __toString() {
+    return '[Response Object]';
+  }  
+  
+  /**
    * Set Template Handler 
    * @param object $obj
    */
@@ -89,6 +97,14 @@ class Response {
   }
   
   /**
+   * End Respons
+   * @param string $data data to display
+   **/
+   public function end($data = null) {
+     die($data);
+   }
+  
+  /**
    * Send remote file to browser as download
    * @param string $file absolute file path
    * @param string $name custom filename
@@ -112,7 +128,7 @@ class Response {
     header('Cache-Control: private');
     header('Pragma: cache'); 
     
-    echo $data;
+    $this->end($data);
   }
   
   /**
@@ -121,7 +137,7 @@ class Response {
   public function renderJSON() {
     header('Content-type: text/plain;');
     
-    echo json_encode($this->data);
+    $this->end(json_encode($this->data));
   }
   
   /**
@@ -130,7 +146,7 @@ class Response {
   public function renderXML() {
     header('Content-type: text/plain;');
     
-    echo XML::array2XML($this->data, 'data');
+    $this->end(XML::array2XML($this->data, 'data'));
   }
 
 }

@@ -74,6 +74,15 @@ class Router {
     $this->handler = array();
     $this->routes = array();
   }
+
+  /**
+   * Custom to String handler
+   * @return string
+   */
+  public function __toString() {
+    return '[Router Object]';
+  }
+  
   
   /**
    * Set Logger object
@@ -155,7 +164,7 @@ class Router {
         'handler' => array($obj, $func));
       array_push($this->routes, $handler);
     } catch (Exception $e) {
-      new DisplayException($e);
+      displayException($e);
     }  
   }
   
@@ -197,14 +206,18 @@ class Router {
     foreach ($routes as &$route) {
       $this->step++;
       
-      if ($this->urlMatchesRoute($route)) {
-        $this->req->url->parseParametersWithRoute($route);
+      try {
+        if ($this->urlMatchesRoute($route)) {
+          $this->req->url->parseParametersWithRoute($route);
         
-        $this->handler[$route['handler'][0]]->$route['handler'][1]($this->req, $this->res, function() { global $Router; $Router->next(); });
-        break;
-      } else {
+          $this->handler[$route['handler'][0]]->$route['handler'][1]($this->req, $this->res, $this);
+          break;
+        } else {
 
-      }     
+        }     
+      } catch (Exception $e) {
+        displayException($e);
+      }      
     }
 
   } 

@@ -37,6 +37,40 @@ function d($var) {
   echo "\n\n";
 }
 
+/**
+ * Display default Exception
+ * @param Exception $e Exception
+ */
+function displayException(&$e) {
+  header("Content-Type:text/plain");
+    
+  echo $e->getMessage() . "\nin ";
+  echo str_replace(ABSPATH, '', $e->getFile()) . ':' . $e->getLine() . "\n\n";    
+  $trace = ($e->getTrace());
+  $counter = count($trace)-1;
+    
+  foreach ($trace as $step) {
+    $step['file'] = str_replace(ABSPATH, '', $step['file']);
+    if ($step['file'] == 'public/index.php') {
+      continue; }
+    echo str_pad($counter, 3, ' ', STR_PAD_LEFT) . ': ' . $step['file'].':'.$step['line'] . ' ';
+    
+    if (isset($step['class']) && isset($step['function'])) {
+      echo $step['class'].$step['type'].$step['function'].'('.implode(', ', $step['args']).') ';
+    } else if (isset($step['function'])) {
+      echo $step['function'].'('.implode(', ', $step['args']).') ';
+    } else {
+      print_r($step);
+    }
+      
+    $counter--;
+    echo "\n";
+  }  
+    
+  die();  
+}
+
+
 if (!function_exists('apache_request_headers')) { 
   /**
    * Get HTTP request headers

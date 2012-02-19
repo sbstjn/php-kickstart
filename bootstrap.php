@@ -27,6 +27,9 @@ $Router = new Router(new Request(), new Response());
 $Router->get('/')->bind('General', 'home');
 $Router->get('/check/:optional?')->bind('General', 'check');
 $Router->get('/download/:file/:type')->bind('General', 'download');
+$Router->get('/error/exception')->bind('General', 'throwExceptionUncaught');
+$Router->get('/error/handleandpass')->bind('General', 'throwExceptionPassthru');
+$Router->get('/error/handle')->bind('General', 'throwExceptionHandle');
 
 $Router->get('/downloadFile/:name?')->bind('General', 'downloadFile');
 $Router->get('/downloadData')->bind('General', 'downloadData');

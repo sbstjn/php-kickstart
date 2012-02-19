@@ -30,6 +30,26 @@ class General {
     $res->render('download');
   }  
   
+  public function throwExceptionUncaught(&$req, &$res) {
+    throw new Exception('Uncaught Exception');
+  }
+  
+  public function throwExceptionPassthru(&$req, &$res) {
+    try {
+      throw new Exception('Handled and thrown up');
+    } catch (Exception $e) {
+      throw $e;
+    }
+  }
+  
+  public function throwExceptionHandle(&$req, &$res) {
+    try {
+      throw new Exception('Handled and caught');
+    } catch (Exception $e) {
+      displayException($e);
+    }  
+  } 
+  
   public function downloadFile(&$req, &$res) {
     $res->downloadFile(ABSPATH . 'handler/General.class.php', $req->param('name'));
   }
