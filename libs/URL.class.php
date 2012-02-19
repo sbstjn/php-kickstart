@@ -48,6 +48,14 @@ class URL {
   }
   
   /**
+   * Custom to String handler
+   * @return string
+   */
+  public function __toString() {
+    return '[URL Object]';
+  }  
+  
+  /**
    * Get parameter from URL
    * @param string $key parameter name
    * @param mixed $default default return if key not found

@@ -19,7 +19,6 @@ class Server {
   
   var $router;
   
-  
   /**
    * Handle Request
    */
@@ -30,6 +29,15 @@ class Server {
     
     $this->router->handle();
   }
+  
+  /**
+   * Custom to String handler
+   * @return string
+   */
+  public function __toString() {
+    return '[Server Object]';
+  }  
+  
   /**
    * Handle Request
    * @param Router $Router

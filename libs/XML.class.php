@@ -63,6 +63,14 @@ class XML {
   }
 
   /**
+   * Custom to String handler
+   * @return string
+   */
+  public function __toString() {
+    return '[XML Object]';
+  }
+
+  /**
    * Add indention level
    */
   private function indent() {

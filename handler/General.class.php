@@ -14,6 +14,14 @@
 
 class General {
 
+  /**
+   * Custom to String handler
+   * @return string
+   */
+  public function __toString() {
+    return '[General Handler]';
+  }
+
   public function home(&$req, &$res) {
     $res->render('home');    
   }

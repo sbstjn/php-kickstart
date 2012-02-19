@@ -30,6 +30,14 @@ class MustacheTemplate {
   }
 
   /**
+   * Custom to String handler
+   * @return string
+   */
+  public function __toString() {
+    return '[MustacheTemplate Object]';
+  }  
+
+  /**
    * Clean assigned variables
    **/
   public function clean() {

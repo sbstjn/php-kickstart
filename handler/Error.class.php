@@ -18,6 +18,14 @@
 class Error {
 
   /**
+   * Custom to String handler
+   * @return string
+   */
+  public function __toString() {
+    return '[Error Handler]';
+  }
+
+  /**
    * Not found
    * @param Request $req Request object
    * @param Response $res Response object
